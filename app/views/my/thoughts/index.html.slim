@@ -1,0 +1,9 @@
+h2 My thoughts
+p = current_user.email
+
+= render partial: "new_thought"
+
+h3 Your Thoughts
+= render partial: "thought", collection: @thoughts
+
+= link_to "Log out", destroy_user_session_path, :method => :delete
