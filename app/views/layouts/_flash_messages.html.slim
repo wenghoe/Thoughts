@@ -1,0 +1,4 @@
+- flash.each do |flash_type, message|
+  .alert.alert-dismissable class="#{bootstrap_class_for(flash_type)}"
+    button.close data-dismiss='alert' ×
+    = message

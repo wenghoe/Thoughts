@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   end
 
   namespace :my do
-    resources :thoughts
+    resources :thoughts do
+      member do
+        put :hide
+      end
+    end
   end
 end

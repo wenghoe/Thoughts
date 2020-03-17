@@ -9,8 +9,9 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
     body
-      = render partial: "layouts/navbar"
+      = render partial: "layouts/navbar"      
       .container
+        = render "layouts/flash_messages"
         .row
-          .col-lg-9            
+          .col-lg-9
             = yield
