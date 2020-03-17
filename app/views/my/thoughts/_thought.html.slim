@@ -1,2 +1,3 @@
-p
-  | Thought: #{thought.content}
+- if !thought.content.empty? && thought.visible?
+  p
+    | Thought: #{thought.content}
