@@ -33,6 +33,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails',  '~> 4.0.0.beta3'
   gem 'rails-controller-testing'
   gem 'dotenv-rails'
 end
@@ -64,4 +65,3 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'
 gem 'devise'
-gem 'rspec-rails',  '~> 4.0.0.beta3'
