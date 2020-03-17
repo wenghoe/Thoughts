@@ -41,4 +41,18 @@ RSpec.describe My::ThoughtsController, type: :controller do
     end
   end
 
+  describe "PUT #hide" do
+    let!(:user) { create(:user, :with_thoughts) }
+    let!(:thought) { user.thoughts.first }
+    before { sign_in user }
+
+    context "with valid params" do
+      subject { put :hide, params: { id: thought.id } }
+      it "hides the thought" do
+        expect{subject}.to change { thought.visible }.from(true).to(false)
+        expect{subject}.to redirect_to(my_thoughts_path)
+      end
+    end
+
+  end
 end
