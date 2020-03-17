@@ -10,5 +10,11 @@ FactoryBot.define do
     trait :invalid do
       first_name { "" }
     end
+
+    trait :with_thoughts do
+      after(:build) do |user|
+        user.thoughts << FactoryBot.build_list(:thought, 2)
+      end
+    end
   end
 end
