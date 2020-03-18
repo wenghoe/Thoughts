@@ -2,3 +2,4 @@
   p
     | Thought: #{thought.content}
     = link_to "Delete", hide_my_thought_path(thought), method: :put
+    = link_to "Edit", edit_my_thought_path(thought), method: :get

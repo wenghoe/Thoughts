@@ -1,13 +1,13 @@
 class My::ThoughtsController < ApplicationController
   before_action :prepare_new_thought, :only => :index
-  before_action :prepare_thought, :only => :hide
+  before_action :prepare_thought, :only => [:hide, :edit, :update]
 
   def index
     @thoughts = current_user.thoughts
   end
 
   def create
-    @thought = current_user.thoughts.build(param_thought)
+    @thought = current_user.thoughts.build(params_thought)
     if @thought.save
       flash[:success] = "Thought created"
       redirect_to action: :index
@@ -24,6 +24,15 @@ class My::ThoughtsController < ApplicationController
     redirect_to action: :index
   end
 
+  def edit
+  end
+
+  def update
+    @thought.update!(params_thought)
+    flash[:success] = "Thought updated"
+    redirect_to action: :index
+  end
+
   private
   def prepare_new_thought
     @thought = current_user.thoughts.build
@@ -33,8 +42,8 @@ class My::ThoughtsController < ApplicationController
     @thought = current_user.thoughts.find(params[:id])
   end
 
-  def param_thought
-    params.require(:thought).permit(:content)
+  def params_thought
+    params.require(:thought).permit(:content, :visible)
   end
 
 end

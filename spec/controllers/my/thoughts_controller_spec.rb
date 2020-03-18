@@ -27,7 +27,7 @@ RSpec.describe My::ThoughtsController, type: :controller do
       subject { post :create, params: { thought: attributes_for(:thought) } }
       it "creates a new user" do
         expect{subject}.to change(Thought,:count).by(1)
-        expect{subject}.to redirect_to(my_thoughts_path)
+        expect(subject).to redirect_to(my_thoughts_path)
       end
     end
 
@@ -49,10 +49,45 @@ RSpec.describe My::ThoughtsController, type: :controller do
     context "with valid params" do
       subject { put :hide, params: { id: thought.id } }
       it "hides the thought" do
-        expect{subject}.to change { thought.visible }.from(true).to(false)
-        expect{subject}.to redirect_to(my_thoughts_path)
+        expect(thought.visible).to be_false
+        expect(subject).to redirect_to(my_thoughts_path)
+      end
+    end
+  end
+
+  describe "GET #edit" do
+    let!(:user) { create(:user, :with_thoughts) }
+    let!(:thought) { user.thoughts.first }
+    before { sign_in user }
+
+    context "with valid params" do
+      subject { get :edit, params: { id: thought.id } }
+      it "edits the thought" do
+        expect(subject).to render_template(:edit)
+        expect(subject).to have_http_status(:success)
+      end
+    end
+  end
+
+  describe "PATCH #update" do
+    let!(:user) { create(:user, :with_thoughts) }
+    let!(:thought) { user.thoughts.first }
+    before { sign_in user }
+
+    context "with valid params" do
+      subject { patch :update, params: { content: "New content" } }
+      it "updates the thought" do
+        expect(thought.content).to eq("New content")
+        expect(subject).to redirect_to(my_thoughts_path)
       end
     end
 
+    context "with invalid params" do
+      subject { patch :update, params: { content: "" } }
+      it "does not update the thought" do
+        expect(thought.content).to eq("Content")
+        expect(subject).to redirect_to(my_thoughts_path)
+      end
+    end
   end
 end

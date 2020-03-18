@@ -13,5 +13,13 @@ RSpec.describe My::ThoughtsController, type: :routing do
     it "routes to #hide" do
       expect(:put => "/my/thoughts/1/hide").to route_to("my/thoughts#hide", :id => "1")
     end
+
+    it "routes to #edit" do
+      expect(:get => "/my/thoughts/1/edit").to route_to("my/thoughts#edit", :id => "1")
+    end
+
+    it "routes to #update" do
+      expect(:patch => "/my/thoughts/1/").to route_to("my/thoughts#update", :id => "1")
+    end
   end
 end

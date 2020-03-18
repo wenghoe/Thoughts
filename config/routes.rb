@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   end
 
   namespace :my do
-    resources :thoughts do
+    resources :thoughts, only: [:index, :create, :edit, :update] do
       member do
         put :hide
       end
