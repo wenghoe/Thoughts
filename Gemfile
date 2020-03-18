@@ -64,6 +64,7 @@ group :test do
   gem 'faker'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'webdrivers'
+  gem 'simplecov', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
