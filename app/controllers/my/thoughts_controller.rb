@@ -32,6 +32,7 @@ class My::ThoughtsController < ApplicationController
       flash[:success] = "Thought updated"
       redirect_to action: :index
     else
+      flash[:error] = @thought.errors.full_messages
       render :edit
     end
 
