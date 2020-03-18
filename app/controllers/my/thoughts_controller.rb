@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class My::ThoughtsController < ApplicationController
-  before_action :prepare_new_thought, :only => :index
-  before_action :prepare_thought, :only => [:hide, :edit, :update]
+  before_action :prepare_new_thought, only: :index
+  before_action :prepare_thought, only: %i[hide edit update]
 
   def index
     @thoughts = current_user.thoughts
@@ -9,10 +11,10 @@ class My::ThoughtsController < ApplicationController
   def create
     @thought = current_user.thoughts.build(params_thought)
     if @thought.save
-      flash[:success] = "Thought created"
+      flash[:success] = 'Thought created'
       redirect_to action: :index
     else
-      flash[:error] = "Could not create thought"
+      flash[:error] = 'Could not create thought'
       redirect_to action: :index
     end
   end
@@ -20,16 +22,15 @@ class My::ThoughtsController < ApplicationController
   def hide
     @thought.visible = false
     @thought.save
-    flash[:success] = "Thought removed"
+    flash[:success] = 'Thought removed'
     redirect_to action: :index
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @thought.update(params_thought)
-      flash[:success] = "Thought updated"
+      flash[:success] = 'Thought updated'
       redirect_to action: :index
     else
       flash[:error] = @thought.errors.full_messages
@@ -39,14 +40,15 @@ class My::ThoughtsController < ApplicationController
 
   def search
     if params[:query].start_with?('#')
-      query  = params[:query].gsub('#', '')
-      @thoughts = Thought.joins(:hashtags).where(hashtags: {name: query})
+      query = params[:query].gsub('#', '')
+      @thoughts = Thought.joins(:hashtags).where(hashtags: { name: query })
     else
-      @thoughts = Thought.where("content like ?", "%#{params[:query]}%")
+      @thoughts = Thought.where('content like ?', "%#{params[:query]}%")
     end
   end
 
   private
+
   def prepare_new_thought
     @thought = current_user.thoughts.build
   end
@@ -58,5 +60,4 @@ class My::ThoughtsController < ApplicationController
   def params_thought
     params.require(:thought).permit(:content, :visible)
   end
-
 end

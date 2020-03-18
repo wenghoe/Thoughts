@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Thought < ApplicationRecord
   validates :content, presence: true
   belongs_to :user
@@ -7,7 +9,7 @@ class Thought < ApplicationRecord
   after_commit :create_hashtags, on: :create
 
   private
-  
+
   def create_hashtags
     extract_name_hashtags.each do |name|
       hashtags.create(name: name)
@@ -15,6 +17,6 @@ class Thought < ApplicationRecord
   end
 
   def extract_name_hashtags
-    content.to_s.scan(/#\w+/).map{|name| name.gsub("#", "")}
+    content.to_s.scan(/#\w+/).map { |name| name.gsub('#', '') }
   end
 end

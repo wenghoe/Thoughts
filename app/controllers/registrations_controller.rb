@@ -1,6 +1,7 @@
-class RegistrationsController < Devise::RegistrationsController
+# frozen_string_literal: true
 
-  def after_sign_up_path_for(resource)
+class RegistrationsController < Devise::RegistrationsController
+  def after_sign_up_path_for(_resource)
     my_thoughts_path
   end
 
