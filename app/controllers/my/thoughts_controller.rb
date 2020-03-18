@@ -35,8 +35,15 @@ class My::ThoughtsController < ApplicationController
       flash[:error] = @thought.errors.full_messages
       render :edit
     end
+  end
 
-
+  def search
+    if params[:query].start_with?('#')
+      query  = params[:query].gsub('#', '')
+      @thoughts = Thought.joins(:hashtags).where(hashtags: {name: query})
+    else
+      @thoughts = Thought.where("content like ?", "%#{params[:query]}%")
+    end
   end
 
   private

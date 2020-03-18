@@ -3,7 +3,7 @@ module ThoughtHelper
     content_words = content.split(" ")
     content_with_links = content_words.map do |word|
       if word.include?("#")
-        link_to word, '#'
+        link_to word, search_my_thoughts_path(query: word)
       else
         word
       end

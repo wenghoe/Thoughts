@@ -9,6 +9,9 @@ Rails.application.routes.draw do
       member do
         put :hide
       end
+      collection do
+        get :search
+      end
     end
   end
 end
