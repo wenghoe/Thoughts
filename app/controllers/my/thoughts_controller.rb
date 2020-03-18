@@ -28,9 +28,14 @@ class My::ThoughtsController < ApplicationController
   end
 
   def update
-    @thought.update!(params_thought)
-    flash[:success] = "Thought updated"
-    redirect_to action: :index
+    if @thought.update(params_thought)
+      flash[:success] = "Thought updated"
+      redirect_to action: :index
+    else
+      render :edit
+    end
+
+
   end
 
   private

@@ -75,7 +75,7 @@ RSpec.describe My::ThoughtsController, type: :controller do
     before { sign_in user }
 
     context "with valid params" do
-      subject { patch :update, params: { content: "New content" } }
+      subject { patch :update, params: { id: thought.id, thought: { content: "New content" } } }
       it "updates the thought" do
         expect(thought.content).to eq("New content")
         expect(subject).to redirect_to(my_thoughts_path)
@@ -83,10 +83,10 @@ RSpec.describe My::ThoughtsController, type: :controller do
     end
 
     context "with invalid params" do
-      subject { patch :update, params: { content: "" } }
+      subject { patch :update, params: { id: thought.id, thought: { content: "" } } }
       it "does not update the thought" do
         expect(thought.content).to eq("Content")
-        expect(subject).to redirect_to(my_thoughts_path)
+        expect(subject).to render_template(:edit)
       end
     end
   end
