@@ -69,6 +69,9 @@ GEM
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
     builder (3.2.4)
+    bullet (6.1.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     byebug (11.1.1)
     capybara (3.31.0)
       addressable
@@ -120,6 +123,8 @@ GEM
     loofah (2.4.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
+    macaddr (1.7.2)
+      systemu (~> 2.6.5)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (0.3.3)
@@ -199,6 +204,8 @@ GEM
       rspec-mocks (~> 3.9)
       rspec-support (~> 3.9)
     rspec-support (3.9.2)
+    ruby-growl (4.1)
+      uuid (~> 2.3, >= 2.3.5)
     ruby_dep (1.5.0)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
@@ -234,6 +241,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    systemu (2.6.5)
     temple (0.8.2)
     thor (1.0.1)
     thread_safe (0.3.6)
@@ -243,6 +251,9 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.6)
       thread_safe (~> 0.1)
+    uniform_notifier (1.13.0)
+    uuid (2.3.9)
+      macaddr (~> 1.0)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (4.0.1)
@@ -261,6 +272,7 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
+    xmpp4r (0.5.6)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.3.0)
@@ -271,6 +283,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.2)
   bootstrap (~> 4.4.1)
+  bullet
   byebug
   capybara (>= 2.15)
   database_cleaner
@@ -286,6 +299,7 @@ DEPENDENCIES
   rails (~> 6.0.2, >= 6.0.2.1)
   rails-controller-testing
   rspec-rails (~> 4.0.0.beta3)
+  ruby-growl
   sass-rails (>= 6)
   selenium-webdriver
   shoulda-matchers (~> 3.1)
@@ -297,6 +311,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 4.0)
+  xmpp4r
 
 RUBY VERSION
    ruby 2.7.0p0
