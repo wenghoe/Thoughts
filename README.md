@@ -1,24 +1,31 @@
-# README
+# Project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Thoughts like Twitter but no follow
 
-Things you may want to cover:
+## Install
 
-* Ruby version
+### Clone the repository
 
-* System dependencies
+```shell
+git clone git@github.com:wenghoe/Thoughts.git
+cd Thoughts
+```
 
-* Configuration
+### Install dependencies
 
-* Database creation
+Using [Bundler](https://github.com/bundler/bundler) and [Yarn](https://github.com/yarnpkg/yarn):
 
-* Database initialization
+```shell
+bundle && yarn
+```
 
-* How to run the test suite
+### Initialize the database
 
-* Services (job queues, cache servers, search engines, etc.)
+```shell
+rails db:setup
+```
 
-* Deployment instructions
 
-* ...
+```shell
+rails s
+```
