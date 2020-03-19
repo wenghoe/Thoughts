@@ -1,12 +1,12 @@
 .row
-  .col-xs-2
+  .col-xs-3
     h3 Search Thoughts
     = render partial: "search_form"
     = link_to "Log out", destroy_user_session_path, :method => :delete
-  .col-xs-1
   .col-xs-9
     h2 My thoughts
     .col-lg-6
+      h3 Hey #{current_user.username}!
       = render partial: "new"
     .col-lg-3
     h3 Your Thoughts
