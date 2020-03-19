@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :thought do
-    content { 'Content' }
+    content { 'Content #content' }
     visible { true }
 
     trait :invalid do

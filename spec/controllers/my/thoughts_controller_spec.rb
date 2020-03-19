@@ -23,12 +23,14 @@ RSpec.describe My::ThoughtsController, type: :controller do
 
   describe 'POST #create' do
     let!(:user) { create(:user, :with_thoughts) }
+
     before { sign_in user }
 
     context 'with valid params' do
       subject { post :create, params: { thought: attributes_for(:thought) } }
       it 'creates a new user' do
         expect { subject }.to change(Thought, :count).by(1)
+        expect { subject }.to change(Hashtag, :count).by(1)
         expect(subject).to redirect_to(my_thoughts_path)
       end
     end
@@ -39,6 +41,7 @@ RSpec.describe My::ThoughtsController, type: :controller do
       subject { post :create, params: { user: attributes_for(invalid_thought) } }
       it 'does not create a thought' do
         expect { subject }.to_not change(Thought, :count)
+        expect(subject).to redirect_to(my_thoughts_path)
       end
     end
   end
@@ -89,6 +92,25 @@ RSpec.describe My::ThoughtsController, type: :controller do
       it 'does not update the thought' do
         expect(thought.content).to eq('Content')
         expect(subject).to render_template(:edit)
+      end
+    end
+  end
+
+  describe 'GET #search' do
+    let!(:user) { create(:user, :with_thoughts) }
+    before { sign_in user }
+
+    context 'with hashtag' do
+      subject { get :search, params: { query: '#content' } }
+      it 'returns search results' do
+        expect(controller.thoughts).to include(user.thoughts.first)
+      end
+    end
+
+    context 'with text' do
+      subject { get :search, params: { query: 'Content' } }
+      it 'returns search results' do
+        expect(controller.thoughts).to include(user.thoughts.first)
       end
     end
   end
